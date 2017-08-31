@@ -1,0 +1,17 @@
+HostName,IPAddress,Port,PortDescription
+S1-Router,10.0.1.1,8080,WebAdmin
+LM-VH02,10.0.1.2,8080,Open Hardware Monitor
+LM-VH02,10.0.1.2,445,SMB
+LM-VH02,10.0.1.2,3389,RDP
+LM-VH02,10.0.1.2,5985,WinRM
+S1-DC1,10.0.1.3,3389,RDP
+S1-DC1,10.0.1.3,5985,WinRM
+S1-DC1,10.0.1.3,389,AD Domain Services
+S1-DC1,10.0.1.3,88,AD Domain Services
+S1-DC1,10.0.1.3,464,AD Domain Services
+S1-Web-Server,10.0.1.4,80,HTTP
+S1-Web-Server,10.0.1.4,443,HTTPS
+S1-Web-Server,10.0.1.4,3306,MySQL
+S1-Web-Server,10.0.1.4,445,Samba (SMB)
+S1-VM-Desktop,10.0.1.5,3389,RDP
+S1-VM-Desktop,10.0.1.5,5900,VNC
