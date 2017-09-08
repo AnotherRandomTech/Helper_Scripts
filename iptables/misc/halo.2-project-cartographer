@@ -1,0 +1,20 @@
+#Halo 2 Project Cartographer Setup only to External servers.
+
+#Allow Access for H2 PC Client to Update
+-A INPUT -p tcp ! -i eth0 -d 69.195.136.203 -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp ! -i eth0 -d 69.195.136.203 -m tcp --dport 443 -j ACCEPT
+
+-A INPUT -p udp ! -i eth0 -d 69.195.136.203 -m udp --dport 80 -j ACCEPT
+-A INPUT -p udp ! -i eth0 -d 69.195.136.203 -m udp --dport 443 -j ACCEPT
+
+# VIA TCP TRAFFIC!
+-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+
+-A INPUT -p tcp ! -i eth0 -d 69.195.136.203 -m tcp --dport 1000:1009 -j ACCEPT
+-A INPUT -p tcp ! -i eth0 -d 69.195.136.203 -m tcp --dport 27020 -j ACCEPT
+-A INPUT -p tcp ! -i eth0 -m tcp --dport 1000:5009
+
+# VIA UDP TRAFFIC!
+-A INPUT -p udp ! -i eth0 -d 69.195.136.203 -m udp --dport 1000:1009 -j ACCEPT
+-A INPUT -p udp ! -i eth0 -d 69.195.136.203 -m udp --dport 27020 -j ACCEPT
+-A INPUT -p udp ! -i eth0 -m udp --dport 1000:5009
