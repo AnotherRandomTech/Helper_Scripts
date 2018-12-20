@@ -1,8 +1,10 @@
 ﻿<# Will Play an Audio File from a Directory in the background. Modified to 
 Source: https://www.pdq.com/blog/powershell-music-remotely/
 #>
+## Fix Invoke-WebRequest Failing on all Requests
+[Net.ServicePointManager]::SecurityProtocol = "Tls12, Tls11, tls"
 
-$RandomChoice = Get-Random(1..8)
+$RandomChoice = Get-Random(0..9)
 #Write-Host ("Choice :", $RandomChoice)
 switch ($RandomChoice)
 {
@@ -21,7 +23,8 @@ switch ($RandomChoice)
 
 try{
 #Write-Host "Downloading..."
-(New-Object System.Net.WebClient).DownloadFile($URL, ($env:APPDATA + ".\prank_audio.mp3"))
+$outFile = ($env:APPDATA + "\prank_audio.mp3")
+(New-Object System.Net.WebClient).DownloadFile($URL, $outFile)
 }
 catch{
 Write-Error "Error downloading prank audio!"
@@ -35,12 +38,9 @@ $wshShell = new-object -com wscript.shell;1..50 | % {$wshShell.SendKeys([char]17
 Set-Speaker -Volume 50
 
 Add-Type -AssemblyName presentationCore
-$filepath = [uri] ($env:APPDATA + ".\prank_audio.mp3")
-
-#$filepath = $URL
 try{
 $wmplayer = New-Object System.Windows.Media.MediaPlayer
-$wmplayer.Open($filepath)
+$wmplayer.Open($outFile)
 Start-Sleep 2 # This allows the $wmplayer time to load the audio file
 $duration = $wmplayer.NaturalDuration.TimeSpan.TotalSeconds
 
@@ -61,4 +61,4 @@ exit -2
 }
 
 ## Finish up and remove files.
-Remove-Item ($env:APPDATA + ".\prank_audio.mp3") | Out-Null
+Remove-Item $outFile | Out-Null
